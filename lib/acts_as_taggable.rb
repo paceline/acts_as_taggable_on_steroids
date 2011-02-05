@@ -6,7 +6,7 @@ module ActiveRecord #:nodoc:
       end
       
       module ClassMethods
-        def acts_as_taggable
+        def acts_as_taggable(options = {})
           has_many :taggings, :as => :taggable, :dependent => :destroy, :include => :tag
           has_many :tags, :through => :taggings
           
@@ -136,7 +136,13 @@ module ActiveRecord #:nodoc:
         
         def find_options_for_tag_counts(options = {})
           options = options.dup
-          scope = scope(:find)
+          # Probably a bad way to do this, but #scope has changed in Rails 3 and
+          # I'm not sure what to use instead.
+          scope = if ActiveRecord::VERSION::MAJOR >= 3
+                    {}
+                  else
+                    scope(:find) || {}
+                  end
           
           conditions = []
           conditions << send(:sanitize_conditions, options.delete(:conditions)) if options[:conditions]

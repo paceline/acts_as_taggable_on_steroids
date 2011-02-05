@@ -1,5 +1,6 @@
 class Tag < ActiveRecord::Base
   has_many :taggings, :dependent => :destroy
+  has_permalink :name, :update => true if Tag.columns_hash['permalink']
   
   validates_presence_of :name
   validates_uniqueness_of :name
@@ -55,13 +56,15 @@ class Tag < ActiveRecord::Base
       joins = ["INNER JOIN #{Tagging.table_name} ON #{Tag.table_name}.id = #{Tagging.table_name}.tag_id"]
       joins << options.delete(:joins) if options[:joins]
       
+      columns = Tag.column_names.collect { |c| "#{Tag.table_name}.#{c}" }.join(', ')
+      
       at_least  = sanitize_sql(['COUNT(*) >= ?', options.delete(:at_least)]) if options[:at_least]
       at_most   = sanitize_sql(['COUNT(*) <= ?', options.delete(:at_most)]) if options[:at_most]
       having    = [at_least, at_most].compact.join(' AND ')
-      group_by  = "#{Tag.table_name}.id, #{Tag.table_name}.name HAVING COUNT(*) > 0"
+      group_by  = "#{columns} HAVING COUNT(*) > 0"
       group_by << " AND #{having}" unless having.blank?
       
-      { :select     => "#{Tag.table_name}.id, #{Tag.table_name}.name, COUNT(*) AS count", 
+      { :select     => "#{columns}, COUNT(*) AS count", 
         :joins      => joins.join(" "),
         :conditions => conditions,
         :group      => group_by

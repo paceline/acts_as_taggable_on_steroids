@@ -1,11 +1,7 @@
-= acts_as_taggable_on_steroids
+== Note
 
-If you find this plugin useful, please consider a donation to show your support!
+This is a fork of Jonathan Viney's acts_as_taggable_on_steroids (thanks for the great work!), adding support for single table inheritance (STI) and permalinks. The original version can be found here https://github.com/jviney/acts_as_taggable_on_steroids
 
-  http://www.paypal.com/cgi-bin/webscr?cmd=_send-money
-  
-  Email address: jonathan.viney@gmail.com
-  
 == Instructions
 
 This plugin is based on acts_as_taggable by DHH but includes extras
@@ -15,11 +11,11 @@ such as tests, smarter tag assignment, and tag cloud calculations.
 
 Rails 2.*
 
-  ruby script/plugin install git://github.com/jviney/acts_as_taggable_on_steroids.git
+  ruby script/plugin install git://github.com/paceline/acts_as_taggable_on_steroids.git
 
 Rails 3:
 
-  rails plugin install git://github.com/jviney/acts_as_taggable_on_steroids.git
+  rails plugin install git://github.com/paceline/acts_as_taggable_on_steroids.git
 
 == Usage
 
@@ -151,7 +147,3 @@ Set Tag.destroy_unused to remove tags when they are no longer being
 used to tag any objects. Defaults to false.
 
   Tag.destroy_unused = true
-
-=== Other
-
-Problems, comments, and suggestions all welcome. jonathan.viney@gmail.com  

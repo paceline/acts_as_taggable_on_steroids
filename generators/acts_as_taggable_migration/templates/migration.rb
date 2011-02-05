@@ -12,6 +12,9 @@ class ActsAsTaggableMigration < ActiveRecord::Migration
       # long enough to store the required class names.
       t.column :taggable_type, :string
       
+      # Optional: Support permalinks using permalink_fu
+      # t.column :permalink, :string
+      
       t.column :created_at, :datetime
     end
     
