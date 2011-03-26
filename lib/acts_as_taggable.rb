@@ -63,6 +63,8 @@ module ActiveRecord #:nodoc:
         #   :exclude - Find models that are not tagged with the given tags
         #   :match_all - Find models that match all of the given tags, not just one
         #   :conditions - A piece of SQL conditions to add to the query
+        #   :joins - Either an SQL fragment for additional joins like "LEFT JOIN comments ON comments.post_id = id" (rarely needed) or named associations in the same form used for the :include option, which will perform an INNER JOIN on the associated table(s). If the value is a string, then the records will be returned read-only since they will have attributes that do not correspond to the table‘s columns. Pass :readonly => false to override.
+        #   :from - By default, this is the table name of the class, but can be changed to an alternate table name (or even the name of a database view).
         def find_tagged_with(*args)
           options = find_options_for_find_tagged_with(*args)
           options.blank? ? [] : find(:all, options)
@@ -83,6 +85,7 @@ module ActiveRecord #:nodoc:
             "INNER JOIN #{Tagging.table_name} #{taggings_alias} ON #{taggings_alias}.taggable_id = #{table_name}.#{primary_key} AND #{taggings_alias}.taggable_type = #{quote_value(base_class.name)}",
             "INNER JOIN #{Tag.table_name} #{tags_alias} ON #{tags_alias}.id = #{taggings_alias}.tag_id"
           ]
+          joins << " #{options.delete(:joins)}" if options[:joins]
           
           if options.delete(:exclude)
             conditions << <<-END
