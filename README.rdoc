@@ -4,18 +4,14 @@ This is a fork of Jonathan Viney's acts_as_taggable_on_steroids (thanks for the 
 
 == Instructions
 
-This plugin is based on acts_as_taggable by DHH but includes extras
+This gem is based on acts_as_taggable by DHH but includes extras
 such as tests, smarter tag assignment, and tag cloud calculations.
 
 == Installation
 
-Rails 2.*
+Just add the following line to your Gemfile:
 
-  ruby script/plugin install git://github.com/paceline/acts_as_taggable_on_steroids.git
-
-Rails 3:
-
-  rails plugin install git://github.com/paceline/acts_as_taggable_on_steroids.git
+  gem 'acts_as_taggable_on_steroids', :git => git://github.com/paceline/acts_as_taggable_on_steroids.git
 
 == Usage
 
@@ -23,7 +19,7 @@ Rails 3:
 
 Generate and apply the migration:
 
-  ruby script/generate acts_as_taggable_migration
+  rails g acts_as_taggable_migration my_tag_migration
   rake db:migrate
 
 === Basic tagging

@@ -1,6 +1,6 @@
 class Tag < ActiveRecord::Base
   has_many :taggings, :dependent => :destroy
-  has_permalink :name, :update => true if Tag.columns_hash['permalink']
+  has_permalink :name, :update => true
   
   validates_presence_of :name
   validates_uniqueness_of :name
