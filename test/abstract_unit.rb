@@ -17,9 +17,9 @@ ActiveSupport::Dependencies.load_paths.insert(0, fixture_path)
 require "active_record/test_case"
 require "active_record/fixtures"
 
-require File.dirname(__FILE__) + '/../lib/acts_as_taggable'
-require_dependency File.dirname(__FILE__) + '/../lib/tag_list'
-require_dependency File.dirname(__FILE__) + '/../lib/tags_helper'
+require File.dirname(__FILE__) + '/../lib/acts_as_taggable_on_steroids/acts_as_taggable'
+require_dependency File.dirname(__FILE__) + '/../lib/acts_as_taggable_on_steroids/tag_list'
+require_dependency File.dirname(__FILE__) + '/../lib/acts_as_taggable_on_steroids/tags_helper'
 
 ActiveRecord::Base.logger = Logger.new(File.dirname(__FILE__) + '/debug.log')
 ActiveRecord::Base.configurations = YAML::load(IO.read(File.dirname(__FILE__) + '/database.yml'))
