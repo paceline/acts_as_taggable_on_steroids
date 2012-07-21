@@ -55,4 +55,5 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--inline-source", "--charset=UTF-8"]
   
   s.add_dependency('activerecord', '>= 3.0')
+  s.add_dependency('permalink')
 end

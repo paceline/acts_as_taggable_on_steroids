@@ -1,6 +1,6 @@
 class Tag < ActiveRecord::Base
   has_many :taggings, :dependent => :destroy
-  has_permalink :name, :update => true
+  permalink :name
   
   validates_presence_of :name
   validates_uniqueness_of :name
